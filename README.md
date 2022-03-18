@@ -59,6 +59,8 @@ The basic workflow and data for this exercise come from [Farkas et al., 2021](ht
 ### Exercise Objective
 Download and analyze a small sample of genomic data using published scripts to see an applied process of genomic data processing.
 
+For this exercise, create a text file called \<last-name\>_exercise3.txt. Within this text file, you should answer each of the questions in this exercise marked with *.
+
 ### Getting set up
 1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
 2.  Clone repository and activate conda environment
@@ -100,7 +102,7 @@ genomics-pipeline-intro -h
 Now that you have examined the script, run it.
 
 ```
-genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 30
+genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 4
 ``` 
 
 
