@@ -1,0 +1,24 @@
+name: genomics-pipeline-intro # name of environment
+channels:
+- conda-forge
+- bioconda
+- daler
+- default
+dependencies:         # everything under this, installed by conda
+- zlib
+- samtools
+- htslib
+- minimap2
+- fastp
+- freebayes
+- vcflib
+- seqkit
+- r-base
+- r-ggplot2
+- r-ggrepel
+- r-vcfr
+- pip
+- pip:                # everything under this, installed by pip
+  - jacquard
+  - pyfasta
+  - pyfaidx 
