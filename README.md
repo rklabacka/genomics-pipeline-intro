@@ -23,7 +23,7 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 # <a name="study-design"></a>
 ## Genomic Filetypes
 
-### .fastq 
+### <b>.fastq</b> 
 Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, .fastq files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
 
 ```
@@ -69,9 +69,28 @@ With this info, you can parse out the information from the first sequence id in 
 
 For the purposes of this introduction, you don't need to worry about all of these elements– just that this line is the unique identifier for the sequence with additional sequencing details.
 
-### .sam
-Filler text
-### .vcf
+### <b>.sam</b>
+Sequence alignment map (SAM) files are text-based genomic files with biological sequence data aligned to a reference sequence. SAM files contain a <b>[header section](sam-header-section)</b> and an <b>[alignment section](sam-alignment-section)</b>.
+
+# <a name="sam-header-section"></a>
+#### 3) .sam Header Section
+The header section precedes the alignment section, and each heading begins with the '@' symbol. 
+
+# <a name="sam-alignment-section"></a>
+#### 3) .sam Alignment Section
+The alignment section requires 11 fields, and additional fields are optional.
+The required fields are as follows:
+
+| Col |  Field     | Type   |  value                             |
+|:---:|:----------:|:------:|:----------------------------------:|
+|  1  |  QNAME     | string |  Query template NAME               |
+|  2  |  FLAG      | int    |  bitwise FLAG                      |
+|  3  |  RNAME     | string |  Ref sequence NAME                 |
+|  4  |  POS       | int    |  1-based leftmost mapping POSition |
+|  5  |  
+
+
+### <b>.vcf</b>
 Filler text
 
 ---
