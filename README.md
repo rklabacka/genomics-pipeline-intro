@@ -24,7 +24,21 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 ## Genomic Filetypes
 
 ### .fastq 
-Filler text
+Similar to .fasta files, .fastq files contain a <span style="color:blue">some *sequence identifier* text</span> and biological sequence data. Additionally, .fastq files contain a sequencing quality score for each base pair position. Here is an example of one sequence and its associated information:
+
+```
+@SeqID
+AAGCCAGCAAACCTTGTTTTACCTCACTGATATAGATTAGATATTTCAAGACAAATTTGTTGCCAATGTTAGATTATTAACATTATTTATTATAAAAATA
++
+CCCFFFFFHHHHHJJJJJJJJJJJJJJJJIJJJJJJJJJJJJIJIJJJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJHHHHHHHFFFFFFFEEEEEEC
+```
+
+The first character for this sequence is '@'. Similar to the '>' character in .fasta files, the '@' character in .fastq files denotes the sequence identity for the following sequence. Additionally, this line might contain a description of the sequence. For example, Illumina sequence data uses the following format for the sequence ID and description:
+
+```
+@<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
+```
+ 
 ### .sam
 Filler text
 ### .vcf
@@ -59,7 +73,7 @@ The basic workflow and data for this exercise come from [Farkas et al., 2021](ht
 ### Exercise Objective
 Download and analyze a small sample of genomic data using published scripts to see an applied process of genomic data processing.
 
-For this exercise, create a text file called \<last-name\>_exercise3.txt. Within this text file, you should answer each of the questions in this exercise marked with *.
+For this exercise, create a text file called \<last-name\>_exercise3.txt. Within this text file, you should answer each of the questions in this exercise marked with an asterisk (*).
 
 ### Getting set up
 1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
