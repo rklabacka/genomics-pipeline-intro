@@ -9,6 +9,7 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 -   [Objectives](#objectives)
 -   [Genomic Filetypes](#genomic-filetypes)
 -   [Basic Processing Steps](#basic-processing-steps)
+-   [Exercise](#exercise)
 
 ---
 
@@ -22,16 +23,16 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 # <a name="study-design"></a>
 ## Genomic Filetypes
 
-#### .fastq 
+### .fastq 
 Filler text
-#### .sam
+### .sam
 Filler text
-#### .vcf
+### .vcf
 Filler text
 
 ---
 
-# <a name="bioinformatics"></a>
+# <a name="basic-processing-steps"></a>
 ## Basic Processing Steps
 Filler text
 
@@ -50,4 +51,24 @@ Filler text
 |  III | Remove multi-allelic SNPs                                       | 63,000 |
 |  IV  | Remove singletons                                               | 21,898 |
 |  V   | Remove sites with high amounts of missing data                  | 12,512 |
+
+# <a name="exercise"></a>
+## Exercise
+The basic workflow and data for this exercise come from [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041) and the associated [github repository](https://github.com/cfarkas/SARS-CoV-2-freebayes).
+
+### Getting set up
+1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
+2.  Clone repository and activate conda environment
+```
+git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
+cd genomics-pipeline-intro
+conda config --add channels conda-forge                        # add conda-forge channel (if you haven't already done so)
+conda config --add channels bioconda                           # add bioconda channel (if you haven't already done so)
+conda env update --file environment.yml                        # install required programs
+conda activate genomics-pipeline-intro                         # activate genomics-pipeline-intro enviroment
+bash makefile.sh                                               # make & install
+sudo cp ./bin/* /usr/local/bin/                                # Copy binaries into /usr/local/bin/ (require sudo privileges)
+```
+
+
 
