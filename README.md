@@ -56,6 +56,9 @@ Filler text
 ## Exercise
 The basic workflow and data for this exercise come from [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041) and the associated [github repository](https://github.com/cfarkas/SARS-CoV-2-freebayes).
 
+### Exercise Objective
+Download and analyze a small sample of genomic data using published scripts to see an applied process of genomic data processing.
+
 ### Getting set up
 1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
 2.  Clone repository and activate conda environment
@@ -68,6 +71,21 @@ conda env update --file environment.yml                        # install require
 conda activate genomics-pipeline-intro                         # activate genomics-pipeline-intro enviroment
 bash makefile.sh                                               # make & install
 sudo cp ./bin/* /usr/local/bin/                                # Copy binaries into /usr/local/bin/ (require sudo privileges)
+```
+
+3.  Install a vcftools version that includes the --haploid flag as follows:
+```
+git clone https://github.com/cfarkas/vcftools.git       # Forked Julien Y. Dutheil version: https://github.com/jydu/vcftools
+cd vcftools
+./autogen.sh
+./configure
+make                                                    # make
+sudo make install                                       # requires sudo privileges
+```
+
+4. Install the latest version of sra toolkit. See instructions here:
+```
+https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
 ```
 
 
