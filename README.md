@@ -24,7 +24,7 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 ## Genomic Filetypes
 
 ### .fastq 
-Similar to .fasta files, .fastq files contain a  &#x1F538; sequence identifier and biological sequence data. Additionally, .fastq files contain a sequencing quality score for each base pair position. Here is an example of one sequence and its associated information:
+Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#sequence-id)</b> and <b>biological sequence data</b>. Additionally, .fastq files contain a sequencing <b>quality score</b> for each base pair position. Here is an example of one sequence and its associated information:
 
 ```
 @SeqID
@@ -33,6 +33,7 @@ AAGCCAGCAAACCTTGTTTTACCTCACTGATATAGATTAGATATTTCAAGACAAATTTGTTGCCAATGTTAGATTATTAA
 CCCFFFFFHHHHHJJJJJJJJJJJJJJJJIJJJJJJJJJJJJIJIJJJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJHHHHHHHFFFFFFFEEEEEEC
 ```
 
+#### <a name="sequence-id"></a>
 The first character for this sequence is '@'. Similar to the '>' character in .fasta files, the '@' character in .fastq files denotes the sequence identity for the following sequence. Additionally, this line might contain a description of the sequence. For example, Illumina sequence data uses the following format for the sequence ID and description:
 
 ```
