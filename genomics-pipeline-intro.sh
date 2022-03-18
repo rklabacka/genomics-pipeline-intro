@@ -54,6 +54,14 @@ for z in *.fastq.gz; do fastp -w ${t} -i ${z} -o ${z}.fastp
 gzip ${z}.fastp
 done
 
+######################
+# Indexing Reference #
+######################
+
+echo "Indexing Reference"
+echo ""
+samtools faidx ${g}
+
 ###########################################################################################
 # Aligning illumina datasets againts reference with minimap, using 20 threads (-t option) #
 ###########################################################################################
@@ -67,13 +75,6 @@ rm ${b}.sam
 rm ${b}
 done
 
-######################
-# Indexing Reference #
-######################
-
-echo "Indexing Reference"
-echo ""
-samtools faidx ${g}
 
 ######################
 # Renaming BAM files #
