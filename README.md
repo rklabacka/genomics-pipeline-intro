@@ -4,7 +4,7 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
  
 ---
 
-## Contents
+# Contents
 
 -   [Objectives](#objectives)
 -   [Genomic Filetypes](#genomic-filetypes)
@@ -14,16 +14,16 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 ---
 
 # <a name="objectives"></a>
-## Objectives 
+# Objectives 
 
 1.  Understand major genomic filetype structure (.fastq, .sam, .vcf)
 2.  Understand basic flow of genomic bioinformatics pipeline
 ---
 
 # <a name="study-design"></a>
-## Genomic Filetypes
+# Genomic Filetypes
 
-### <b>.fastq</b> 
+## .FASTQ 
 Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, .fastq files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
 
 ```
@@ -50,66 +50,63 @@ Let's look at an example .fastq file. Sometimes these files can be very large, b
 
 > note: If you are new to using vim, you can exit without saving by typing ':q!' followed by enter. 
 
-You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses the following format for the sequence ID and description:
+You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses a [specific format](https://help.basespace.illumina.com/articles/descriptive/fastq-files/) for the sequence ID and description.
 
-```
-@<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
-```
 With this info, you can parse out the information from the first sequence id in example.fastq as follows:
 
-|  description     | value      |
-|:----------------:|:----------:|
-|  instrument      | D3NH4HQ1   |
-|  run number      | 149        |
-|  flowcell ID     | C1H5KACXX  |
-|  lane            | 3          |
-|  tile            | 1101       |
-|  x-pos           | 2106       |
-|  y-pos           | 2242       |
-|  read            | 2          |
-|  is filtered     | N          |
-|  control number  | 0          |
-|  index number    | GCTCGGTA   |
+| Order |  description     | value      |
+|:-----:|:----------------:|:----------:|
+|  1    |  instrument      | D3NH4HQ1   |
+|  2    |  run number      | 149        |
+|  3    |  flowcell ID     | C1H5KACXX  |
+|  4    |  lane            | 3          |
+|  5    |  tile            | 1101       |
+|  6    |  x-pos           | 2106       |
+|  7    |  y-pos           | 2242       |
+|  -    |  space           | -          |
+|  8    |  read            | 2          |
+|  9    |  is filtered     | N          |
+|  10   |  control number  | 0          |
+|  11   |  index number    | GCTCGGTA   |
 
 For the purposes of this introduction, you don't need to worry about all of these elements– just that this line is the unique identifier for the sequence with additional sequencing details.
 
-### <b>.sam</b>
-Sequence alignment map (SAM) files are text-based genomic files with biological sequence data aligned to a reference sequence. SAM files contain a <b>[header section](sam-header-section)</b> and an <b>[alignment section](sam-alignment-section)</b>.
+## .SAM
+Sequence alignment map (SAM) files are text-based genomic files with biological sequence data aligned to a reference sequence. SAM files contain a <b>[header section](sam-header-section)</b> and an <b>[alignment section](sam-alignment-section)</b>. They contain the same information as the .fastq file, with additional information on mapping details. As you probably gathered, that makes these files larger than the .fastq files.
 
 # <a name="sam-header-section"></a>
 #### 3) .sam Header Section
-The header section precedes the alignment section, and each heading begins with the '@' symbol. Each heading contains tab-delimited sections. The first column indicates the record type. The following columns contain tags and values (in the format TAG:VALUE). While there are different tag types, two you will see often are @SQ (reference sequences) and @PG (programs used for creating .sam). The values of these tags contain information about the sequence. @SQ requires the reference sequence length tag (LN) and the @PG tag requires the program identity, but may also include the program name (PN), version (VN), and command line implementation (CL).
+The header section precedes the alignment section, and each heading begins with the '@' symbol. Each heading contains tab-delimited sections. The first column indicates the record type. The following columns contain tags and values (in the format TAG:VALUE). While there are different tag types, two you will see often are @SQ (reference sequences) and @PG (programs used for creating .sam). The values of these tags contain information about the sequence. @SQ requires the reference sequence name (SN) and length (LN) tags, and the @PG tag requires the program identity but may also include the program name (PN), version (VN), and command line implementation (CL).
 
 
 # <a name="sam-alignment-section"></a>
 #### 3) .sam Alignment Section
-The alignment section requires 11 fields, and additional fields are optional. The required fields are described in the table below.
+The alignment section requires 11 tab-separated fields, and additional fields are optional. Each line within this section represents the alignment of a segment to the reference. The 11 required sections include information on the query template (read that mapped), the reference sequence name (SN), the position on reference where the query template mapped, the mapping quality, the sequence itself, and the quality score for each position in the base pair. Simplified descriptions of each required field are within the table in the [looking at a .SAM file](sam-example) section.
 
-| Col |  Field     | Type   |  Description                       |
-|:---:|:----------:|:------:|:----------------------------------:|
-|  1  |  QNAME     | string |  query template name               |
-|  2  |  FLAG      | int    |  bitwise flag                      |
-|  3  |  RNAME     | string |  ref sequence name                 |
-|  4  |  POS       | int    |  1-based leftmost mapping position |
-|  5  |  MAPQ      | ing    |  mapping quality                   |
-|  6  |  CIGAR     | string |  [CIGAR string](https://jef.works/blog/2017/03/28/CIGAR-strings-for-dummies/) |
-|  7  |  RNEXT     | string |  ref name of the mate/next read    |
-|  8  |  PNEXT     | int    |  position of the mate/next read    |
-|  9  |  TLEN      | int    |  template length                   |
-|  10 |  SEQ       | string |  segment sequence                  |
-|  11 |  QUAL      | string |  ASCII of Phred-scaled base quality |
 
+# <a name="sam-alignment-section"></a>
 #### Looking at a .sam file
-Let's look at an example .sam file. These files can be very large, but example.sam is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.fastq```. You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses the following format for the sequence ID and description:
+Let's look at an example .sam file. These files can be very large, but example.sam is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.sam```. 
 > note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
 
-```
-@<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
-```
-With this info, you can parse out the information from the first sequence id in example.fastq as follows:
+You'll see that there are many @SQ header lines (one for each of the reference sequences). Each of these has a name and length. At line 366 you'll see the @PG header line for the program details. The remaining lines of the file contain alignment information. From what we learned above, we can parse the first alignment line (line 367) as follows:
 
 
-### <b>.vcf</b>
+| Col |  Field     | Type   |  Description                                                                  |  Value             |
+|:---:|:----------:|:------:|:-----------------------------------------------------------------------------:|:------------------:|
+|  1  |  QNAME     | string |  query template name                                                          |  D3NH...:4262:2214 |
+|  2  |  FLAG      | int    |  bitwise flag                                                                 |  99                |
+|  3  |  RNAME     | string |  ref sequence name                                                            |  NC_045541.1       |
+|  4  |  POS       | int    |  1-based leftmost mapping position                                            |  72165682          |
+|  5  |  MAPQ      | ing    |  mapping quality                                                              |  60                |
+|  6  |  CIGAR     | string |  [CIGAR string](https://jef.works/blog/2017/03/28/CIGAR-strings-for-dummies/) |  100M              |
+|  7  |  RNEXT     | string |  ref name of the mate/next read                                               |  =                 |
+|  8  |  PNEXT     | int    |  position of the mate/next read                                               |  72165982          |
+|  9  |  TLEN      | int    |  template length                                                              |  399               |
+|  10 |  SEQ       | string |  segment sequence                                                             |  TACTTATGTTCT...   |
+|  11 |  QUAL      | string |  ASCII of Phred-scaled base quality                                           |  @DCC?CCEC>CE...   |
+
+### .VCF
 Filler text
 
 ---
