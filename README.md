@@ -46,7 +46,11 @@ The second line contains the sequence itself (string of nucleotides). The sequen
 The fourth line contains a quality score for each position of the sequence. Each character represents a number based on ASCII coding (see this [link](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm) for the relationship between symbols and quality score value). On this scale, 0 ('!') is the lowest value, and 40 ('I') is the highest value. Because each score corresponds to a site within the sequence itself, the number of score symbols must equal the number of positions in the sequence.
 
 #### Looking at a .fastq file
-Let's look at an example .fastq file. Sometimes these files can be very large, but example.fastq is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```less example.fastq```. You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses the following format for the sequence ID and description:
+Let's look at an example .fastq file. Sometimes these files can be very large, but example.fastq is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.fastq```. 
+
+> note: If you are new to using vim, you can exit without saving by typing ':q!' followed by enter. 
+
+You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses the following format for the sequence ID and description:
 
 ```
 @<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
@@ -65,7 +69,7 @@ With this info, you can parse out the information from the first sequence id in 
 |  read            | 2          |
 |  is filtered     | N          |
 |  control number  | 0          |
-|  sample number   | GCTCGGTA   |
+|  index number    | GCTCGGTA   |
 
 For the purposes of this introduction, you don't need to worry about all of these elements– just that this line is the unique identifier for the sequence with additional sequencing details.
 
@@ -74,20 +78,35 @@ Sequence alignment map (SAM) files are text-based genomic files with biological 
 
 # <a name="sam-header-section"></a>
 #### 3) .sam Header Section
-The header section precedes the alignment section, and each heading begins with the '@' symbol. 
+The header section precedes the alignment section, and each heading begins with the '@' symbol. Each heading contains tab-delimited sections. The first column indicates the record type. The following columns contain tags and values (in the format TAG:VALUE). While there are different tag types, two you will see often are @SQ (reference sequences) and @PG (programs used for creating .sam). The values of these tags contain information about the sequence. @SQ requires the reference sequence length tag (LN) and the @PG tag requires the program identity, but may also include the program name (PN), version (VN), and command line implementation (CL).
+
 
 # <a name="sam-alignment-section"></a>
 #### 3) .sam Alignment Section
-The alignment section requires 11 fields, and additional fields are optional.
-The required fields are as follows:
+The alignment section requires 11 fields, and additional fields are optional. The required fields are described in the table below.
 
-| Col |  Field     | Type   |  value                             |
+| Col |  Field     | Type   |  Description                       |
 |:---:|:----------:|:------:|:----------------------------------:|
-|  1  |  QNAME     | string |  Query template NAME               |
-|  2  |  FLAG      | int    |  bitwise FLAG                      |
-|  3  |  RNAME     | string |  Ref sequence NAME                 |
-|  4  |  POS       | int    |  1-based leftmost mapping POSition |
-|  5  |  
+|  1  |  QNAME     | string |  query template name               |
+|  2  |  FLAG      | int    |  bitwise flag                      |
+|  3  |  RNAME     | string |  ref sequence name                 |
+|  4  |  POS       | int    |  1-based leftmost mapping position |
+|  5  |  MAPQ      | ing    |  mapping quality                   |
+|  6  |  CIGAR     | string |  [CIGAR string](https://jef.works/blog/2017/03/28/CIGAR-strings-for-dummies/) |
+|  7  |  RNEXT     | string |  ref name of the mate/next read    |
+|  8  |  PNEXT     | int    |  position of the mate/next read    |
+|  9  |  TLEN      | int    |  template length                   |
+|  10 |  SEQ       | string |  segment sequence                  |
+|  11 |  QUAL      | string |  ASCII of Phred-scaled base quality |
+
+#### Looking at a .sam file
+Let's look at an example .sam file. These files can be very large, but example.sam is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.fastq```. You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina paired-end sequencing (the platform and method used to obtain this sequencing data) uses the following format for the sequence ID and description:
+> note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
+
+```
+@<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
+```
+With this info, you can parse out the information from the first sequence id in example.fastq as follows:
 
 
 ### <b>.vcf</b>
