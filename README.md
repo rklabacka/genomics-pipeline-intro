@@ -24,7 +24,7 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 ## Genomic Filetypes
 
 ### .fastq 
-Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#sequence-id)</b> and <b>biological sequence data</b>. Additionally, .fastq files contain a sequencing <b>quality score</b> for each base pair position. Here is an example of one sequence and its associated information:
+Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, .fastq files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
 
 ```
 @SeqID
@@ -33,13 +33,25 @@ AAGCCAGCAAACCTTGTTTTACCTCACTGATATAGATTAGATATTTCAAGACAAATTTGTTGCCAATGTTAGATTATTAA
 CCCFFFFFHHHHHJJJJJJJJJJJJJJJJIJJJJJJJJJJJJIJIJJJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJHHHHHHHFFFFFFFEEEEEEC
 ```
 
-#### <a name="sequence-id"></a>
-The first character for this sequence is '@'. Similar to the '>' character in .fasta files, the '@' character in .fastq files denotes the sequence identity for the following sequence. Additionally, this line might contain a description of the sequence. For example, Illumina sequence data uses the following format for the sequence ID and description:
+# <a name="fastq-seq-id"></a>
+#### 1) .fastq Sequence Identifier
+The first line is the sequence identifier. The first character for the identifier line is '@'. Similar to the '>' character in .fasta files, the '@' character in .fastq files denotes the sequence identity for the following sequence. Additionally, this line might contain a description of the sequence. 
+ 
+# <a name="fastq-seq-data"></a>
+#### .fastq Sequence Data
+The second line contains the sequence itself (string of nucleotides). The sequence is followed by a '+' on the third line to indicate the end of the sequence string.
 
+# <a name="fastq-qual-score"></a>
+#### .fastq Quality Score
+The fourth line contains a quality score for each position of the sequence. Each character represents a number based on ASCII coding(see this [link](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm) for the relationship between symbols and quality score value). On this scale, 0 (!) is the lowest value, and 40 (I) is the highest value. Because each score corresponds to a site within the sequence itself, the number of score symbols must equal the number of positions in the sequence.
+
+#### Looking at a .fastq file
+HERE
+For example, Illumina sequence data uses the following format for the sequence ID and description:
 ```
 @<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
 ```
- 
+
 ### .sam
 Filler text
 ### .vcf
