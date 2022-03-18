@@ -88,5 +88,16 @@ sudo make install                                       # requires sudo privileg
 https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
 ```
 
+### Raw reads to vcf
+
+Examine the genomics-pipeline-intro.sh (in the bash_scripts directory). Where are the areas where file transformation occurs? What input files are necessary?
+
+You can see the parameters required for the script 
+
+Now that you have examined the script, run it.
+
+```
+genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 30
+``` 
 
 

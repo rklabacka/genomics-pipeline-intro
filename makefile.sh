@@ -17,7 +17,6 @@ echo "make done. Continue with install"
 ./shc/src/shc -f ./bash_scripts/genomics-pipeline-intro.sh -o ./genomics-pipeline-intro
 ./shc/src/shc -f ./bash_scripts/SnpEff_processing.sh -o ./SnpEff_processing
 ./shc/src/shc -f ./bash_scripts/pi-tajima.sh -o ./pi-tajima
-mv  ./bin/
 mv genomics-pipeline-intro SARS-CoV-2-merge-variants pi-tajima SnpEff_processing ./bin/
 echo ""
 echo "All done. Binaries are located in ./bin/ folder"
