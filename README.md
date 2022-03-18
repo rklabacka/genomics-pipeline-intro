@@ -53,6 +53,7 @@ Let's look at an example .fastq file. Sometimes these files can be very large, b
 ```
 With this info, you can parse out the information from the first sequence id in example.fastq as follows:
 
+|  description     | value      |
 |:----------------:|:----------:|
 |  instrument      | D3NH4HQ1   |
 |  run number      | 149        |
@@ -65,7 +66,6 @@ With this info, you can parse out the information from the first sequence id in 
 |  is filtered     | N          |
 |  control number  | 0          |
 |  sample number   | GCTCGGTA   |
-|:----------------:|:----------:|
 
 For the purposes of this introduction, you don't need to worry about all of these elements– just that this line is the unique identifier for the sequence with additional sequencing details.
 
