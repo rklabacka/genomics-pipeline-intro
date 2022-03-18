@@ -92,7 +92,10 @@ https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
 
 Examine the genomics-pipeline-intro.sh (in the bash_scripts directory). Where are the areas where file transformation occurs? What input files are necessary?
 
-You can see the parameters required for the script 
+You can see the parameters required for the script by looking at the help menu:
+```
+genomics-pipeline-intro -h
+```
 
 Now that you have examined the script, run it.
 
