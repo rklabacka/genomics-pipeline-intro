@@ -81,16 +81,16 @@ SeqID 99  ref_name 72165682    60  100M    =   72165982    399 TACTTATGTTCTTCTTC
 ```
 
 # <a name="sam-header-section"></a>
-#### 3) .sam Header Section
+#### 1) .sam Header Section
 The header section precedes the alignment section, and each heading begins with the '@' symbol. Each heading contains tab-delimited sections. The first column indicates the record type. The following columns contain tags and values (in the format TAG:VALUE). While there are different tag types, two you will see often are @SQ (reference sequences) and @PG (programs used for creating .sam). The values of these tags contain information about the sequence. @SQ requires the reference sequence name (SN) and length (LN) tags, and the @PG tag requires the program identity but may also include the program name (PN), version (VN), and command line implementation (CL).
 
 
 # <a name="sam-alignment-section"></a>
-#### 3) .sam Alignment Section
+#### 2) .sam Alignment Section
 The alignment section requires 11 tab-separated fields, and additional fields are optional. Each line within this section represents the alignment of a segment to the reference. The 11 required sections include information on the query template (read that mapped), the reference sequence name (SN), the position on reference where the query template mapped, the mapping quality, the sequence itself, and the quality score for each position in the base pair. Simplified descriptions of each required field are within the table in the [looking at a .SAM file](sam-example) section.
 
 
-# <a name="sam-alignment-section"></a>
+# <a name="sam-example"></a>
 #### Looking at a .sam file
 Let's look at an example .sam file. These files can be very large, but example.sam is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.sam```. 
 > note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
@@ -110,10 +110,34 @@ You'll see that there are many @SQ header lines (one for each of the reference s
 |  8  |  PNEXT     | int    |  position of the mate/next read                                               |  72165982          |
 |  9  |  TLEN      | int    |  template length                                                              |  399               |
 |  10 |  SEQ       | string |  segment sequence                                                             |  TACTTATGTTCT...   |
-|  11 |  QUAL      | string |  ASCII of Phred-scaled base quality                                           |  @DCC?CCEC>CE...   |
+|  11 |  QUAL      | string |  [ASCII score](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.html) of base quality                                                  |  @DCC?CCEC>CE...   |
 
 ### .VCF
-Filler text
+Variant call format (VCF) files are text-based genomic files with information on sequence variation. More specifically, it includes sites where multiple characters are present in the samples examined. A .vcf file contains a <b>[header section](vcf-header-section)</b> and a <b>[variant data section](vcf-data-section)</b>. Basic .vcf files do not contain information on every position from the .fastq or reference file, rather they include information on the genomic positions with sequence variation. As you probably gathered, that makes these files smaller than the .fastq and .sam files (and the less variation, the smaller the file). Here is an abbreviated example of header and alignment lines within a .vcf file:
+
+```
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered">
+##INFO=<ID=FS,Number=1,Type=Float,Description="Phred-scaled p-value using Fisher's exact test to detect strand bias">
+##contig=<ID=NC_045541.1,length=186725308,assembly=reference.fasta>
+##reference=file://reference.fasta
+#CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  Sample01   Sample02   Sample03
+NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.4;DP=6;FS=0.000 GT:AD:DP:GQ  0/0:6,0:6:42   ./.:0,0:0:0   1/0:6,6:12:71
+```
+
+# <a name="vcf-header-section"></a>
+#### 1) .vcf Header Section
+The header section precedes the variant data section, and each heading begins with '##' symbols (notice there are *two* hash marks).  Information about the variant dataset, the reference sequence, and the program used to generate the .vcf are contained within the header. ```FORMAT``` and ```INFO``` sections of the header include information on the site and genotype annotation in the data section (i.e., the abbreviations in this section correspond with those in the data section). The ```contig``` and ```reference``` sections contain information about the reference used for variant calling.
+
+# <a name="vcf-data-section"></a>
+#### 1) .vcf Variant Data Section
+HERE
 
 ---
 
