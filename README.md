@@ -38,19 +38,20 @@ CCCFFFFFHHHHHJJJJJJJJJJJJJJJJIJJJJJJJJJJJJIJIJJJJJJJJJJJJJJJJJJJJJJIJJJJJJIJJJJH
 The first line is the sequence identifier. The first character for the identifier line is '@'. Similar to the '>' character in .fasta files, the '@' character in .fastq files denotes the sequence identity for the following sequence. Additionally, this line might contain a description of the sequence. 
  
 # <a name="fastq-seq-data"></a>
-#### .fastq Sequence Data
+#### 2) .fastq Sequence Data
 The second line contains the sequence itself (string of nucleotides). The sequence is followed by a '+' on the third line to indicate the end of the sequence string.
 
 # <a name="fastq-qual-score"></a>
-#### .fastq Quality Score
+#### 3) .fastq Quality Score
 The fourth line contains a quality score for each position of the sequence. Each character represents a number based on ASCII coding(see this [link](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm) for the relationship between symbols and quality score value). On this scale, 0 (!) is the lowest value, and 40 (I) is the highest value. Because each score corresponds to a site within the sequence itself, the number of score symbols must equal the number of positions in the sequence.
 
 #### Looking at a .fastq file
-HERE
-For example, Illumina sequence data uses the following format for the sequence ID and description:
+Let's look at an example .fastq file. Sometimes these files can be very large, but example.fastq is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```less example.fastq```. You'll notice that the sequence identifier line is more complex than the example above. Sequencing companies use this line to provide unique characteristics of each sequence. For example, Illumina (the platform used to obtain this sequencing data) uses the following format for the sequence ID and description:
+
 ```
 @<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<x-pos>:<y-pos> <read>:<is filtered>:<control number>:<sample number>
 ```
+For the purposes of this introduction, you don't need to worry about all of these elements– just that this line is the unique identifier for the sequence with additional sequencing details.
 
 ### .sam
 Filler text
