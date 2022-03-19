@@ -131,7 +131,7 @@ Variant call format (VCF) files are text-based genomic files with information on
 ##contig=<ID=NC_045541.1,length=186725308,assembly=reference.fasta>
 ##reference=file://reference.fasta
 #CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  Sample01   Sample02   Sample03
-NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.4;DP=6;FS=0.000 GT:AD:DP:GQ  0/0:6,0:6:42   ./.:0,0:0:0   1/0:6,6:12:71
+NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.25;DP=6;FS=0.000 GT:AD:DP:GQ  0/0:6,0:6:42   ./.:0,0:0:0   1/0:6,6:12:71
 ```
 
 # <a name="vcf-header-section"></a>
@@ -141,17 +141,33 @@ The ```FORMAT``` header lines define tags whose properties pertain to the varian
 
 # <a name="vcf-data-section"></a>
 #### 1) .vcf Variant Data Section
-The variant section consists of a row for every variant. The columns provide information about (1) the variant site as a whole and (2) the genotype of each individual in the dataset. The first section of columns correspond to the variant site as a whole, with the first 8 columns being required (```CHROM```, ```POS```, ```ID```, ```REF```, ```ALT```, ```QUAL```, ```FILTER```, ```INFO```. These include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. While these fields are required for each variant, they can be empty (a signified by ```.```). Descriptions for each of these fields are shown in the table below (values are from the variant of the abbreviated vcf file above).
+The variant section consists of a row for every variant. The columns provide information about (1) site-level properties and annotations and (2) sample-leve annotations. The first section of columns (site-level properties and annotations) correspond to the variant site as a whole. This section consists of 8 columns, all of which are required in the vcf file (```CHROM```, ```POS```, ```ID```, ```REF```, ```ALT```, ```QUAL```, ```FILTER```, ```INFO```). These required fields include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. While these fields are required for each variant, they can be empty (a signified by ```.```). Descriptions for each of these fields are shown in the table below (values are from the variant of the abbreviated vcf file above).
 
 | Col |  Field  |  Description                                                                   |  Value        |
 |:---:|:-------:|:------------------------------------------------------------------------------:|:-------------:|
-|  1  |  CHROM  |  Contig name                                                                   |  NC_045541.1  |
-|  2  |  POS    |  Position of variant within contig                                             |  1206         |
-|  3  |  ID     |  Optional identifier for variant                                               |  .            |
-|  4  |  REF    |  Reference allele (sequence character(s) at POS in reference)                  |  A            | 
-|  5  |  ALT    |  Alternate allele (sequence character in at POS in at least one sample)        |  G            |
-|  6  |  QUAL   |  Phred-scaled probability that variant exists at this site given data*         |  138.21       |
-|  7  |  FILTER |  ```PASS``` means the variant has passed filtering, . means no filtering has occurred|  .      |
+| *Site-level properties and annotations*             
+|  1  | ```CHROM```  |  Contig name                                                                   |  NC_045541.1  |
+|  2  | ```POS```    |  Position of variant within contig                                             |  1206         |
+|  3  | ```ID```     |  Optional identifier for variant                                               |  .            |
+|  4  | ```REF```    |  Reference allele (sequence character(s) at POS in reference)                  |  A            | 
+|  5  | ```ALT```    |  Alternate allele (sequence character in at POS in at least one sample)        |  G            |
+|  6  | ```QUAL```   |  Phred-scaled probability that variant exists at this site given data*         |  138.21       |
+|  7  | ```FILTER``` |  ```PASS``` means the variant has passed filtering, . means no filtering has occurred|  .      |
+|  8  | ```INFO```   |  Site-level annotations (properties of variant site as a whole)                |  AC=2;AF=0.25;DP=6;FS=0.000 |
+\* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
+
+The ```INFO``` values correspond to the flags defined in the header, where descriptions are provided. In the abbreviated vcf file, we see that this variant as an allele count (```AC```) of 2 (there are two alleles at this site), a minor allele frequency (```AF```) of 0.4 (the alternate allele's frequency in the dataset), a depth of coverate (```DP```) of 6 (the average depth per-individual at this site is 6 reads), and a p-value (```FS```) of 0.000. There are typically more property fields than this in a vcf, but this hopefully gives you a sense of how to read these sections.
+
+The subsequent columns pertain to sample-level annotations. These fields consist of the formatting for the sample-specific property (```FORMAT```) followed by a column for each sample. In the abbreviated vcf file above, there are three samples (```Sample01```, ```Sample02```, and ```Sample03```). The values within the sample columns correspond to the ordered flags shown in the ```FORMAT``` column. These properties are shown in table format below; the Col values are a continuation from the table above.
+
+| Col |  Field          |  Description                            | Value           |
+|:---:|:---------------:|:---------------------------------------:|:---------------:|
+|  9  |  ```FORMAT```   | Format for sample-specific annotations  | GT:AD:DP:GQ     |
+|  10 |  ```Sample01``` | The annotation values for Sample 01     | 0/0:6,0:6:42    |
+|  11 |  ```Sample02``` | The annotation values for Sample 02     | ./.:0,0:0:0     |
+|  12 |  ```Sample03``` | The annotation values for Sample 03     | 1/0:6,6:12:71   |
+
+
 
 The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
 
