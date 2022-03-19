@@ -116,63 +116,8 @@ echo ""
 find . -size 0 -delete
 echo "Merge VCFs using jacquard"
 echo ""
-ulimit -n 1000000 && jacquard merge --include_all ./ merged.vcf
+jacquard merge --include_all ./ merged.vcf
 
-echo "Left only genotypes in merged VCF"
-echo ""
-vcfkeepgeno merged.vcf GT > merged.GT.vcf
-
-echo "Splitting variants and header from merged.GT.vcf"
-echo ""
-grep "#" merged.GT.vcf > header
-grep -v "#" merged.GT.vcf > variants.vcf
-
-sed -i 's|1/1|1|'g variants.vcf   # convert diploid to haploid
-sed -i 's|0/1|1|'g variants.vcf   # convert diploid to haploid
-sed -i 's|1/0|1|'g variants.vcf   # convert diploid to haploid
-sed -i 's/[.]/0/'g variants.vcf   # convert points to zeros
-
-# Reconstitute vcf file
-echo "Reconstituting vcf file"
-echo ""
-cat header variants.vcf > merged.fixed.vcf
-rm header variants.vcf
-sed -i 's/NC_04551202/NC_045512.2/'g merged.fixed.vcf
-
-echo "left-aligning vcf file and fixing names"
-echo ""
-vcfleftalign -r ${g} merged.fixed.vcf > merged.left.vcf
-sed -i 's/|unknown//'g merged.left.vcf
-
-# Calculating Viral Frequencies
-echo "Calculating viral frequencies with vcflib"
-echo ""
-vcffixup merged.left.vcf > merged.AF.raw.vcf
-wget https://raw.githubusercontent.com/cfarkas/ProblematicSites_SARS-CoV2/master/problematic_sites_sarsCov2.vcf
-sed -i 's/MN908947.3/NC_045512.2/'g problematic_sites_sarsCov2.vcf
-vcfintersect -i problematic_sites_sarsCov2.vcf merged.AF.raw.vcf -r ${g} --invert > merged.AF.vcf
-rm merged.fixed.vcf merged.left.vcf
-gzip merged.vcf merged.AF.raw.vcf
-
-# Filter variants by Viral Frequency: 0.0099 (1%)
-echo "Filtering variants by Viral Frequency: 0.0099 (1%)"
-echo ""
-vcffilter -f "AF > 0.0099" merged.AF.vcf > merged.AF_1%.vcf
-grep -v "##" merged.AF_1%.vcf > merged.AF_1%.table
-
-echo "#######"
-echo "Summary:"
-echo "#######"
-echo ""
-echo "merged.AF.raw.vcf.gz contain all merged variants."
-echo ""
-echo "merged.AF.vcf contain merged variants, problematic sites excluded. See https://virological.org/t/issues-with-sars-cov-2-sequencing-data/473."
-echo ""
-echo "merged.AF_1%.vcf contain merged variants with viral frequency >=1%."
-echo ""
-echo "merged.AF_1%.table contain merged variants (Viral Frequency >=1%), without VCF header, suitable for plotting"
-echo ""
-echo "All done."
 
 end=`date +%s`
 elapsed=`expr $end - $begin`
