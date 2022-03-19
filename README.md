@@ -17,8 +17,40 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 # Objectives 
 
 -  Understand major genomic filetype structure (.fastq, .sam, .vcf)
--  Understand basic flow of genomic bioinformatics pipeline
+-  Understand basic flow of a genomic bioinformatics pipeline
 ---
+
+# Getting setup
+If you are here as a UTU student taking BIOL 3300, you should do the following:
+
+1.  Login to your [Github](https://github.com/) account.
+
+1.  Fork [this repository](https://github.com/rklabacka/genomics-pipeline-intro), by
+    clicking the 'Fork' button on the upper right of the page.
+
+    After a few seconds, you should be looking at *your* 
+    copy of the repo in your own Github account.
+
+1.  Click the 'Clone or download' button, and copy the URL of the repo via the
+    'copy to clipboard' button.
+> note: if you have an SSH key with your github account, make sure you select the ```SSH``` tab
+
+1.  In your terminal, navigate to where you want to keep this repo (you can
+    always move it later, so just your home directory is fine). Then type:
+
+        $ git clone the-url-you-just-copied
+
+    and hit enter to clone the repository. Make sure you are cloning **your**
+    fork of this repo.
+
+1.  Next, `cd` into the directory:
+
+        $ cd the-name-of-directory-you-just-cloned
+
+1.  At this point, you should be in your own local copy of the repository.
+
+    As you work on the exercise below, be sure to frequently `commit` your work
+    and `push` changes to the *remote* copy of the repo hosted on Github.
 
 # <a name="study-design"></a>
 # Genomic Filetypes and Transformations
@@ -29,13 +61,15 @@ For this introduction, you will be introduced to three genomic filetypes:
 2.  [SAM](#sam)
 3.  [VCF](#vcf)
 
-An abbreviated and simplified overview of file transformations via bioinformatics pipeline is as follows:
+The purpose of a bioinformatics pipeline is to transform biological sequence data to a format that can be interpreted. In many cases, researchers are interested in variable regions within the genomes (variants). To find these regions, raw sequencing reads must be aligned (mapped) to a reference, following which the variants can be determined. An abbreviated and simplified overview of file transformations via bioinformatics pipeline is as follows:
 
 
 ![Raw Read FastQC Quality](./images/abbrev-pipeline.jpg)
 
-The "Reference" in the above diagram is an already-assembled FASTA sequence used to orient the data. The italicized words represent file transformations performed by bioinformatics software)
+> The "Reference" in the above diagram is an already-assembled FASTA sequence used to orient the data. The italicized words represent file transformations performed by bioinformatics software)
 
+If you are here because you are taking BIOL 3300 at UTU, you should fork this repository to your github account and clone it to as a local repository:
+```
 To look at the examples of the genomic filetypes that will be reviewed in this introduction, clone this repository:
 ```
 git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
@@ -44,7 +78,7 @@ cd genomics-pipeline-intro
 
 # <a name="fastq"></a>
 ## .FASTQ 
-Similar to .fasta files, FASTQ files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, FASTQ files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
+The filetype that is typically provided by a sequencing facility, FASTQ files are commonly referred to as "raw read" files. Similar to .fasta files, FASTQ files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, FASTQ files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
 
 ```
 @SeqID
