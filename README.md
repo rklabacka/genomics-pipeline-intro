@@ -115,8 +115,7 @@ You'll see that there are many @SQ header lines (one for each of the reference s
 ### .VCF
 Variant call format (VCF) files are text-based genomic files with information on sequence variation. More specifically, it includes sites where multiple characters are present in the samples examined. A .vcf file contains a <b>[header section](vcf-header-section)</b> and a <b>[variant data section](vcf-data-section)</b>. Basic .vcf files do not contain information on every position from the .fastq or reference file, rather they include information on the genomic positions with sequence variation. As you probably gathered, that makes these files smaller than the .fastq and .sam files (and the less variation, the smaller the file). Here is an abbreviated example of header and alignment lines within a .vcf file:
 
-| abbreviated .vcf file |
-|:---------------------:|
+##### abbreviated .vcf file
 
 ```
 ##fileformat=VCFv4.2
@@ -145,7 +144,6 @@ The variant section consists of a row for every variant. The columns provide inf
 
 | Col |  Field  |  Description                                                                   |  Value        |
 |:---:|:-------:|:------------------------------------------------------------------------------:|:-------------:|
-| *Site-level properties and annotations*             
 |  1  | ```CHROM```  |  Contig name                                                                   |  NC_045541.1  |
 |  2  | ```POS```    |  Position of variant within contig                                             |  1206         |
 |  3  | ```ID```     |  Optional identifier for variant                                               |  .            |
@@ -154,7 +152,8 @@ The variant section consists of a row for every variant. The columns provide inf
 |  6  | ```QUAL```   |  Phred-scaled probability that variant exists at this site given data*         |  138.21       |
 |  7  | ```FILTER``` |  ```PASS``` means the variant has passed filtering, . means no filtering has occurred|  .      |
 |  8  | ```INFO```   |  Site-level annotations (properties of variant site as a whole)                |  AC=2;AF=0.25;DP=6;FS=0.000 |
-\* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
+
+###### \* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
 
 The ```INFO``` values correspond to the flags defined in the header, where descriptions are provided. In the abbreviated vcf file, we see that this variant as an allele count (```AC```) of 2 (there are two alleles at this site), a minor allele frequency (```AF```) of 0.4 (the alternate allele's frequency in the dataset), a depth of coverate (```DP```) of 6 (the average depth per-individual at this site is 6 reads), and a p-value (```FS```) of 0.000. There are typically more property fields than this in a vcf, but this hopefully gives you a sense of how to read these sections.
 
@@ -167,7 +166,10 @@ The subsequent columns pertain to sample-level annotations. These fields consist
 |  11 |  ```Sample02``` | The annotation values for Sample 02     | ./.:0,0:0:0     |
 |  12 |  ```Sample03``` | The annotation values for Sample 03     | 1/0:6,6:12:71   |
 
+The value column can be somewhat challenging to understand, so we'll break it down:
 
+| Flag | Description                    | ```Sample01``` | ```Sample02``` | ```Sample03``` |
+| GT   | Genotype: 0/0 = homozygous for reference allele, 1/1 = homozygous for alternate allele, 1/0 = heterozygous, ./. no data | 0/0 | ./. | 1/0 |
 
 The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
 
