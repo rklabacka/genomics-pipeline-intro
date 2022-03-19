@@ -51,6 +51,7 @@ If you are here as a UTU student taking BIOL 3300, you should do the following:
 
     As you work on the exercise below, be sure to frequently `commit` your work
     and `push` changes to the *remote* copy of the repo hosted on Github.
+---
 
 # <a name="study-design"></a>
 # Genomic Filetypes and Transformations
@@ -234,10 +235,11 @@ Now check out the example.vcf file. These files can be very large, but example.v
 
 > note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
 
----
 
 # <a name="exercise"></a>
+---
 # Exercise
+---
 The basic workflow and data for this exercise come from [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041) and the associated [github repository](https://github.com/cfarkas/SARS-CoV-2-freebayes).
 
 ## Exercise Objective
