@@ -175,8 +175,8 @@ The value column can be somewhat challenging to understand, so we'll break it do
 | DP   | Total depth at variant site  | 6              | 0              | 12             | 
 | GQ   | Genotype quality\*\*\*       | 42             | 0              | 71             |
 
-###### \* Depth for ref , depth for alt)
-###### \*\* 0/0 = homozygous for reference allele; 1/1 = homozygous for alternate allele; 1/0 = heterozygous; ./. no data
+###### \* Depth for ref , depth for alt
+###### \*\* 0/0 = homozygous for ref allele; 1/1 = homozygous for alt allele; 1/0 = heterozygous; ./. no data
 ###### \*\*\* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
 
 
