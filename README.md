@@ -20,7 +20,8 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 -  Understand basic flow of a genomic bioinformatics pipeline
 ---
 
-# Getting setup
+# <a name="getting-set-up"></a>
+# Getting set up
 If you are here as a UTU student taking BIOL 3300, you should do the following:
 
 1.  Login to your [Github](https://github.com/) account.
@@ -32,8 +33,7 @@ If you are here as a UTU student taking BIOL 3300, you should do the following:
     copy of the repo in your own Github account.
 
 1.  Click the 'Clone or download' button, and copy the URL of the repo via the
-    'copy to clipboard' button.
-> note: if you have an SSH key with your github account, make sure you select the ```SSH``` tab
+    'copy to clipboard' button. **note: if you have an SSH key with your github account, make sure you select the ```SSH``` tab**
 
 1.  In your terminal, navigate to where you want to keep this repo (you can
     always move it later, so just your home directory is fine). Then type:
@@ -67,14 +67,6 @@ The purpose of a bioinformatics pipeline is to transform biological sequence dat
 ![Raw Read FastQC Quality](./images/abbrev-pipeline.jpg)
 
 > The "Reference" in the above diagram is an already-assembled FASTA sequence used to orient the data. The italicized words represent file transformations performed by bioinformatics software)
-
-If you are here because you are taking BIOL 3300 at UTU, you should fork this repository to your github account and clone it to as a local repository:
-```
-To look at the examples of the genomic filetypes that will be reviewed in this introduction, clone this repository:
-```
-git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
-cd genomics-pipeline-intro
-```
 
 # <a name="fastq"></a>
 ## .FASTQ 
@@ -260,8 +252,10 @@ git commit -m "answered worksheet questions"
 git push
 ```
 
-## Getting set up
-> note: if you haven't cloned this repository yet, make sure you have it cloned (see [study design section](study-design))
+## Exercise set up
+> note: if you haven't cloned this repository yet, make sure you have it cloned (see [Getting set up](#getting-set-up) section)
+
+[Exercise](#exercise)
 1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
 2.  Make sure you are in repository directory and activate conda environment
 ```
