@@ -115,9 +115,8 @@ You'll see that there are many @SQ header lines (one for each of the reference s
 ### .VCF
 Variant call format (VCF) files are text-based genomic files with information on sequence variation. More specifically, it includes sites where multiple characters are present in the samples examined. A .vcf file contains a <b>[header section](vcf-header-section)</b> and a <b>[variant data section](vcf-data-section)</b>. Basic .vcf files do not contain information on every position from the .fastq or reference file, rather they include information on the genomic positions with sequence variation. As you probably gathered, that makes these files smaller than the .fastq and .sam files (and the less variation, the smaller the file). Here is an abbreviated example of header and alignment lines within a .vcf file:
 
-# <a name="abbreviated-vcf"></a>
-| abbreviated .vcf |
-|:----------------:|
+| abbreviated .vcf file |
+|:---------------------:|
 
 ```
 ##fileformat=VCFv4.2
@@ -137,11 +136,24 @@ NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.4;DP=6;FS=0.000 GT:AD:DP:G
 
 # <a name="vcf-header-section"></a>
 #### 1) .vcf Header Section
-The header section precedes the variant data section, and each heading begins with '##' symbols (notice there are *two* hash marks).  Information about the variant dataset, the reference sequence, and the program used to generate the .vcf are contained within the header. ```FORMAT``` and ```INFO``` sections of the header include information on the site and genotype annotation in the data section (i.e., the abbreviations in this section correspond with those in the data section). The ```contig``` and ```reference``` sections contain information about the reference used for variant calling.
+The header section precedes the variant data section, and each heading begins with '##' symbols (notice there are *two* hash marks).  Information about the variant dataset, the reference sequence, and the program used to generate the .vcf are contained within the header. 
+The ```FORMAT``` header lines define tags whose properties pertain to the variant site as a whole, whereas the ```INFO``` header lines describe tags whose properties pertain to the genotype for each individual in the dataset. The abbreviations in ```FORMAT``` and ```INFO``` header lines correspond with those in the data section. The abbreviated .vcf file example above defines four ```FORMAT``` tags (GT, AD, DP, and GQ) and four ```INFO``` (AC, AF, DP, and FS) tags.  The ```contig``` and ```reference``` sections contain information about the reference used for variant calling.
 
 # <a name="vcf-data-section"></a>
 #### 1) .vcf Variant Data Section
-The variant section consists of a row for every variant. The columns provide information about (1) the variant site as a whole and (2) the genotype of each individual in the dataset. The first section of columns correspond to the variant site as a whole, with the first 8 columns being required. These include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. The second section contains information about the genotypes of each sample. In the [abbreviated vcf](abbreviated-vcf) above,  
+The variant section consists of a row for every variant. The columns provide information about (1) the variant site as a whole and (2) the genotype of each individual in the dataset. The first section of columns correspond to the variant site as a whole, with the first 8 columns being required (```CHROM```, ```POS```, ```ID```, ```REF```, ```ALT```, ```QUAL```, ```FILTER```, ```INFO```. These include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. While these fields are required for each variant, they can be empty (a signified by ```.```). Descriptions for each of these fields are shown in the table below (values are from the variant of the abbreviated vcf file above).
+
+| Col |  Field  |  Description                                                                   |  Value        |
+|:---:|:-------:|:------------------------------------------------------------------------------:|:-------------:|
+|  1  |  CHROM  |  Contig name                                                                   |  NC_045541.1  |
+|  2  |  POS    |  Position of variant within contig                                             |  1206         |
+|  3  |  ID     |  Optional identifier for variant                                               |  .            |
+|  4  |  REF    |  Reference allele (sequence character(s) at POS in reference)                  |  A            | 
+|  5  |  ALT    |  Alternate allele (sequence character in at POS in at least one sample)        |  G            |
+|  6  |  QUAL   |  Phred-scaled probability that variant exists at this site given data*         |  138.21       |
+|  7  |  FILTER |  ```PASS``` means the variant has passed filtering, . means no filtering has occurred|  .      |
+
+The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
 
 ---
 
