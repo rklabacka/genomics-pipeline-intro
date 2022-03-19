@@ -255,7 +255,6 @@ git push
 ## Exercise set up
 > note: if you haven't cloned this repository yet, make sure you have it cloned (see [Getting set up](#getting-set-up) section)
 
-[Exercise](#exercise)
 1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
 2.  Make sure you are in repository directory and activate conda environment
 ```
@@ -305,7 +304,9 @@ The script will take a few minutes to run. Once the finished, check that everyth
 ```
 ls *.fastq.gz | wc -l  # Number of .fastq.gz files
 ls -l *.fastq.gz       # Make sure the .fastq.gz files aren't empty
-# The fifth column in the above output is the file size
+                       # note: The fifth column of this output is the file size in bytes
+ls *.bam | wc -l       # Number of .bam files
+ls -l *.bam            # Make sure the .bam files aren't empty
 ls SRR*.vcf | wc -l    # Number of SRR*.vcf files
 ls -l SRR*.vcf         # Make sure the *.vcf files aren't empty
 ls -l merged.vcf       # Make sure the merged.vcf file isn't empty
