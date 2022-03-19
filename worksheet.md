@@ -23,3 +23,6 @@ Answer:
 
 ## Q5: What is the alternate allele depth of sample SRR11621811|unknown at site 25350 in contig NC_045512.2?
 Answer:
+
+## Q6: In what ways would you consider filtering the VCF? In other words, what criteria would you use to remove variants / genotypes from the dataset?
+Answer:
