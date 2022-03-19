@@ -169,6 +169,7 @@ The subsequent columns pertain to sample-level annotations. These fields consist
 The value column can be somewhat challenging to understand, so we'll break it down:
 
 | Flag | Description                    | ```Sample01``` | ```Sample02``` | ```Sample03``` |
+|:----:|:------------------------------:|:--------------:|:--------------:|:--------------:|
 | GT   | Genotype: 0/0 = homozygous for reference allele, 1/1 = homozygous for alternate allele, 1/0 = heterozygous, ./. no data | 0/0 | ./. | 1/0 |
 
 The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
