@@ -21,13 +21,17 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 ---
 
 # <a name="study-design"></a>
-# Genomic Filetypes
+# Genomic Filetypes and Transformations
 
 For this introduction, you will be introduced to three genomic filetypes:
 
 1.  [FASTQ](#fastq)
 2.  [SAM](#sam)
 3.  [VCF](#vcf)
+
+A simplified overview of file transformations via bioinformatics pipeline is as follows:
+
+![Raw Read FastQC Quality](./abbrev-pipeline.jpg)
 
 To look at the genomic files that will be presented, clone this repository:
 ```
