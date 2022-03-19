@@ -23,6 +23,12 @@ Introduction to basic genomics filetypes and processing techniques. The methods 
 # <a name="study-design"></a>
 # Genomic Filetypes
 
+To look at the genomic files that will be presented, clone this repository:
+```
+git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
+cd genomics-pipeline-intro
+```
+
 ## .FASTQ 
 Similar to .fasta files, .fastq files contain a <b>[sequence identifier](#fastq-seq-id)</b> and biological <b>[sequence data](#fastq-seq-data)</b>. Additionally, .fastq files contain a sequencing <b>[quality score](#fastq-qual-score)</b> for each base pair position. Here is an example of one sequence and its associated information:
 
@@ -112,7 +118,7 @@ You'll see that there are many @SQ header lines (one for each of the reference s
 |  10 |  SEQ       | string |  segment sequence                                                             |  TACTTATGTTCT...   |
 |  11 |  QUAL      | string |  [ASCII score](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.html) of base quality                                                  |  @DCC?CCEC>CE...   |
 
-### .VCF
+## .VCF
 Variant call format (VCF) files are text-based genomic files with information on sequence variation. More specifically, it includes sites where multiple characters are present in the samples examined. A .vcf file contains a <b>[header section](vcf-header-section)</b> and a <b>[variant data section](vcf-data-section)</b>. Basic .vcf files do not contain information on every position from the .fastq or reference file, rather they include information on the genomic positions with sequence variation. As you probably gathered, that makes these files smaller than the .fastq and .sam files (and the less variation, the smaller the file). Here is an abbreviated example of header and alignment lines within a .vcf file:
 
 ##### abbreviated .vcf file
@@ -140,7 +146,7 @@ The ```FORMAT``` header lines define tags whose properties pertain to the varian
 
 # <a name="vcf-data-section"></a>
 #### 1) .vcf Variant Data Section
-The variant section consists of a row for every variant. The columns provide information about (1) site-level properties and annotations and (2) sample-leve annotations. The first section of columns (site-level properties and annotations) correspond to the variant site as a whole. This section consists of 8 columns, all of which are required in the vcf file (```CHROM```, ```POS```, ```ID```, ```REF```, ```ALT```, ```QUAL```, ```FILTER```, ```INFO```). These required fields include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. While these fields are required for each variant, they can be empty (a signified by ```.```). Descriptions for each of these fields are shown in the table below (values are from the variant of the abbreviated vcf file above).
+The variant section consists of a row for every variant. The columns provide information about (1) site-level properties and annotations and (2) sample-leve annotations. The first section of columns (site-level properties and annotations) correspond to the variant site as a whole. This section consists of 8 columns, all of which are required in the vcf file (```CHROM```, ```POS```, ```ID```, ```REF```, ```ALT```, ```QUAL```, ```FILTER```, ```INFO```). These required fields include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. While these fields are required for each variant, they can be empty (a signified by `.`). Descriptions for each of these fields are shown in the table below (values are from the variant of the abbreviated vcf file above).
 
 | Col |  Field  |  Description                                                                   |  Value        |
 |:---:|:-------:|:------------------------------------------------------------------------------:|:-------------:|
@@ -179,80 +185,87 @@ The value column can be somewhat challenging to understand, so we'll break it do
 ###### \*\* 0/0 = homozygous for ref allele; 1/1 = homozygous for alt allele; 1/0 = heterozygous; ./. no data
 ###### \*\*\* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
 
+# <a name="vcf-example"></a>
+#### Looking at a .vcf file
+
+Now check out the example.vcf file. Sometimes these files can be very large, but example.vcf is an abbreviated file that can be opened in your text editor. If on the command line, you can examine this file using ```vim example.vcf```. 
+
+> note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
 
 ---
 
-# <a name="basic-processing-steps"></a>
-## Basic Processing Steps
-Filler text
-
-![Raw Read FastQC Quality](./Examining-Sequence-Variation/images/RawReadsFastQC.png)
-
-
-[BWA](https://hpc.nih.gov/apps/bwa.html)
-
-
-
-| Step |                     filtering settings                          |    n   |
-|:----:|:---------------------------------------------------------------:|:------:|
-|  0   | Pre-filter                                                      | 70,177 |
-|  I   | GATK Best Practices: SOR, QD, MQ, MQRankSum, FS, ReadPosRankSum | 64,648 |
-|  II  | Remove individual genotypes with low GQ or low DP               | 64,648 |
-|  III | Remove multi-allelic SNPs                                       | 63,000 |
-|  IV  | Remove singletons                                               | 21,898 |
-|  V   | Remove sites with high amounts of missing data                  | 12,512 |
-
 # <a name="exercise"></a>
-## Exercise
+# Exercise
 The basic workflow and data for this exercise come from [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041) and the associated [github repository](https://github.com/cfarkas/SARS-CoV-2-freebayes).
 
-### Exercise Objective
+## Exercise Objective
 Download and analyze a small sample of genomic data using published scripts to see an applied process of genomic data processing.
 
-For this exercise, create a text file called \<last-name\>_exercise3.txt. Within this text file, you should answer each of the questions in this exercise marked with an asterisk (*).
 
-### Getting set up
-1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
-2.  Clone repository and activate conda environment
+To complete this exercise, complete the following steps and answer the questions contained within the worksheet.md file. Once you have completed the worksheet, add, commit, and push the worksheet to your forked repository.
+
 ```
-git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
-cd genomics-pipeline-intro
+add worksheet.md
+git commit -m "answered worksheet questions"
+git push
+```
+
+## Getting set up
+> note: if you haven't cloned this repository yet, make sure you have it cloned (see [study design section](study-design))
+1.  Make sure [mini/anaconda](https://docs.conda.io/en/latest/miniconda.html) and python versions = 2.7 and >=3.0 are installed.
+2.  Make sure you are in repository directory and activate conda environment
+```
 conda config --add channels conda-forge                        # add conda-forge channel (if you haven't already done so)
 conda config --add channels bioconda                           # add bioconda channel (if you haven't already done so)
 conda env update --file environment.yml                        # install required programs
 conda activate genomics-pipeline-intro                         # activate genomics-pipeline-intro enviroment
-bash makefile.sh                                               # make & install
-sudo cp ./bin/* /usr/local/bin/                                # Copy binaries into /usr/local/bin/ (require sudo privileges)
 ```
 
-3.  Install a vcftools version that includes the --haploid flag as follows:
-```
-git clone https://github.com/cfarkas/vcftools.git       # Forked Julien Y. Dutheil version: https://github.com/jydu/vcftools
-cd vcftools
-./autogen.sh
-./configure
-make                                                    # make
-sudo make install                                       # requires sudo privileges
-```
-
-4. Install the latest version of sra toolkit. See instructions here:
+3. Install the latest version of sra toolkit. See instructions here:
 ```
 https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit
 ```
 
-### Raw reads to vcf
+## Raw reads to vcf
 
-Examine the genomics-pipeline-intro.sh (in the bash_scripts directory). Where are the areas where file transformation occurs? What input files are necessary?
+For this exercise, you will run a bash script containing an abbreviated version of the genomics processing pipeline from [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041). 
 
 You can see the parameters required for the script by looking at the help menu:
 ```
-genomics-pipeline-intro -h
+bash bash_scripts/genomics-pipeline-intro -h
 ```
 
 Now that you have examined the script, run it.
 
 ```
-genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 4
+bash_scripts/genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 4
 ``` 
 
+You should see messages printing to stdout as the script runs. The first of these messages will look like this:
+```
+Downloading SRA files from the given list of accessions
+
+2022-03-19T16:00:22 prefetch.2.11.2: Current preference is set to retrieve SRA Lite files with simplified base quality scores.
+2022-03-19T16:00:23 prefetch.2.11.2: 1) Downloading 'SRR11851929'...
+2022-03-19T16:00:23 prefetch.2.11.2: SRA Normalized Format file is being retrieved, if this is different from your preference, it may be due to current file availability.
+2022-03-19T16:00:23 prefetch.2.11.2:  Downloading via HTTPS...
+2022-03-19T16:00:26 prefetch.2.11.2:  HTTPS download succeed
+2022-03-19T16:00:26 prefetch.2.11.2:  'SRR11851929' is valid
+2022-03-19T16:00:26 prefetch.2.11.2: 1) 'SRR11851929' was downloaded successfully
+2022-03-19T16:00:26 prefetch.2.11.2: 'SRR11851929' has 0 unresolved dependencies
+```
+
+> note: Running into error messages is part of the coding experience. If you run into an error message, don't get too discouraged! First, read the error message. Is it an easy fix? If you aren't sure, copy and paste the error message into an online search engine to see if anyone else has experienced the error and discovered a solution. If you continue having trouble, reach out to your instructor over email to ask for help.
+
+The script will take a few minutes to run. Once the finished, check that everything ran to completion. Your directory should now contain 8 .fastq.gz files, 8 .bam files, 8 .vcf files beginning with ```SRR```, and 1 merged.vcf file. You can verify this information with the following commands:
+```
+ls *.fastq.gz | wc -l  # Number of .fastq.gz files
+ls -l *.fastq.gz       # Make sure the .fastq.gz files aren't empty
+# The fifth column in the above output is the file size
+ls SRR*.vcf | wc -l    # Number of SRR*.vcf files
+ls -l SRR*.vcf         # Make sure the *.vcf files aren't empty
+ls -l merged.vcf       # Make sure the merged.vcf file isn't empty
+```
+
+If the above check worked, congratulations! You successfully ran a published bioinformatics pipeline! Once again, this is not a complete bioinformatics pipeline. The sampling was significantly reduced to allow for shorter computation time, and downstream variant processing is required.
 
