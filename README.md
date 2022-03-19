@@ -31,7 +31,7 @@ For this introduction, you will be introduced to three genomic filetypes:
 
 A simplified overview of file transformations via bioinformatics pipeline is as follows:
 
-![Raw Read FastQC Quality](abbrev-pipeline.jpg)
+![Raw Read FastQC Quality](./images/abbrev-pipeline.png)
 
 To look at the genomic files that will be presented, clone this repository:
 ```
