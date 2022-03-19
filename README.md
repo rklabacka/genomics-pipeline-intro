@@ -1,7 +1,7 @@
 # Genomics Pipeline Intro
 
-Introduction to basic genomics filetypes and processing techniques. The methods presented are necessary for moving from raw genomic reads to variants, but additional steps not introduced here should be implemented. In other words, the purpose of this introduction is to help individuals new to genomics understand the basics of file transformation; it is not to present every step in genomic data processing.
- 
+This repository provides an introduction to basic techniques in genomic processing. Specifically, participants will learn an abbreviated and simplified overview of how raw reads can be converted to variants. The purpose of this introduction is to help individuals new to genomics understand the basics of file transformation; it is not to present every step in genomic data processing (additional steps are required).
+
 ---
 
 # Contents
@@ -312,5 +312,5 @@ ls -l SRR*.vcf         # Make sure the *.vcf files aren't empty
 ls -l merged.vcf       # Make sure the merged.vcf file isn't empty
 ```
 
-If the above check worked, congratulations! You successfully ran a published bioinformatics pipeline! Once again, this is not a complete bioinformatics pipeline. The sampling was significantly reduced to allow for shorter computation time, and downstream variant processing is required.
+If the above check worked, congratulations! You successfully ran a published bioinformatics pipeline! Once again, this is not a complete bioinformatics pipeline. The sampling was significantly reduced to allow for shorter computation time, and downstream variant processing is required.  
 
