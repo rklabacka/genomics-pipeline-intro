@@ -130,7 +130,7 @@ Variant call format (VCF) files are text-based genomic files with information on
 ##contig=<ID=NC_045541.1,length=186725308,assembly=reference.fasta>
 ##reference=file://reference.fasta
 #CHROM  POS ID  REF ALT QUAL    FILTER  INFO    FORMAT  Sample01   Sample02   Sample03
-NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.25;DP=6;FS=0.000 GT:AD:DP:GQ  0/0:6,0:6:42   ./.:0,0:0:0   1/0:6,6:12:71
+NC_045541.1 1206    .   A   G   138.21  .   AC=2;AF=0.25;DP=6;FS=0.000 GT:AD:DP:GQ  0/0:6,0:6:42   ./.:0,0:0:0   1/0:5,7:12:71
 ```
 
 # <a name="vcf-header-section"></a>
@@ -164,13 +164,18 @@ The subsequent columns pertain to sample-level annotations. These fields consist
 |  9  |  ```FORMAT```   | Format for sample-specific annotations  | GT:AD:DP:GQ     |
 |  10 |  ```Sample01``` | The annotation values for Sample 01     | 0/0:6,0:6:42    |
 |  11 |  ```Sample02``` | The annotation values for Sample 02     | ./.:0,0:0:0     |
-|  12 |  ```Sample03``` | The annotation values for Sample 03     | 1/0:6,6:12:71   |
+|  12 |  ```Sample03``` | The annotation values for Sample 03     | 1/0:5,7:12:71   |
 
 The value column can be somewhat challenging to understand, so we'll break it down:
 
-| Flag | Description                    | ```Sample01``` | ```Sample02``` | ```Sample03``` |
-|:----:|:------------------------------:|:--------------:|:--------------:|:--------------:|
-| GT   | Genotype: 0/0 = homozygous for reference allele, 1/1 = homozygous for alternate allele, 1/0 = heterozygous, ./. no data | 0/0 | ./. | 1/0 |
+| Flag | Description                                                    | ```Sample01``` | ```Sample02``` | ```Sample03``` |
+|:----:|:--------------------------------------------------------------:|:--------------:|:--------------:|:--------------:|
+| GT   | Genotype: 0/0 = homozygous for reference allele; 1/1 = homozygous for alternate allele; 1/0 = heterozygous; ./. no data | 0/0 | ./. | 1/0 |
+| AD   | Allele depth (depth for ref , depth for alt)                   | 6,0            | 0,0            | 5,7            |
+| DP   | Total depth at variant site                                    | 6              | 0              | 12             |
+| GQ   | Genotype quality (confidence genotype assignment is correct)*  | 
+
+###### \* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
 
 The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
 
