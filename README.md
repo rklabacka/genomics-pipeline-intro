@@ -29,11 +29,14 @@ For this introduction, you will be introduced to three genomic filetypes:
 2.  [SAM](#sam)
 3.  [VCF](#vcf)
 
-A simplified overview of file transformations via bioinformatics pipeline is as follows:
+An abbreviated and simplified overview of file transformations via bioinformatics pipeline is as follows:
 
-![Raw Read FastQC Quality](./images/abbrev-pipeline.png)
 
-To look at the genomic files that will be presented, clone this repository:
+![Raw Read FastQC Quality](./images/abbrev-pipeline.jpg)
+
+The "Reference" in the above diagram is an already-assembled FASTA sequence used to orient the data. The italicized words represent file transformations performed by bioinformatics software)
+
+To look at the examples of the genomic filetypes that will be reviewed in this introduction, clone this repository:
 ```
 git clone git@github.com:rklabacka/genomics-pipeline-intro.git # clone repository using password-protected ssh key
 cd genomics-pipeline-intro
