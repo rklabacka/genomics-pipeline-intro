@@ -245,13 +245,8 @@ The basic workflow and data for this exercise come from [Farkas et al., 2021](ht
 Download and analyze a small sample of genomic data using published scripts to see an applied process of genomic data processing.
 
 
-To complete this exercise, complete the following steps and answer the questions contained within the worksheet.md file. Once you have completed the worksheet, add, commit, and push the worksheet to your forked repository.
+To complete this exercise, complete the following steps and answer the questions contained within the worksheet.md file. 
 
-```
-add worksheet.md
-git commit -m "answered worksheet questions"
-git push
-```
 
 ## Exercise set up
 > note: if you haven't cloned this repository yet, make sure you have it cloned (see [Getting set up](#getting-set-up) section)
@@ -315,3 +310,9 @@ ls -l merged.vcf       # Make sure the merged.vcf file isn't empty
 
 If the above check worked, congratulations! You successfully ran a published bioinformatics pipeline! Once again, this is not a complete bioinformatics pipeline. The sampling was significantly reduced to allow for shorter computation time, and downstream variant processing is required.  
 
+Once you have completed the worksheet, add, commit, and push the worksheet and the logfile to your forked repository.
+```
+add worksheet.md logfile
+git commit -m "ran script and answered worksheet questions"
+git push
+```
