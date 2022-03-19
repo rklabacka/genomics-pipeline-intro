@@ -168,16 +168,17 @@ The subsequent columns pertain to sample-level annotations. These fields consist
 
 The value column can be somewhat challenging to understand, so we'll break it down:
 
-| Flag | Description                                                    | ```Sample01``` | ```Sample02``` | ```Sample03``` |
-|:----:|:--------------------------------------------------------------:|:--------------:|:--------------:|:--------------:|
-| GT   | Genotype: 0/0 = homozygous for reference allele; 1/1 = homozygous for alternate allele; 1/0 = heterozygous; ./. no data | 0/0 | ./. | 1/0 |
-| AD   | Allele depth (depth for ref , depth for alt)                   | 6,0            | 0,0            | 5,7            |
-| DP   | Total depth at variant site                                    | 6              | 0              | 12             |
-| GQ   | Genotype quality (confidence genotype assignment is correct)*  | 
+| Flag | Description                  | ```Sample01``` | ```Sample02``` | ```Sample03``` |
+|:----:|:----------------------------:|:--------------:|:--------------:|:--------------:|
+| GT   | Genotype\*                   | 0/0            | ./.            | 1/0            |
+| AD   | Allele depth\*\*             | 6,0            | 0,0            | 5,7            |
+| DP   | Total depth at variant site  | 6              | 0              | 12             | 
+| GQ   | Genotype quality\*\*\*       | 42             | 0              | 71             |
 
-###### \* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
+###### \* Depth for ref , depth for alt)
+###### \*\* 0/0 = homozygous for reference allele; 1/1 = homozygous for alternate allele; 1/0 = heterozygous; ./. no data
+###### \*\*\* Value of 10 means 0.1 chance of error; value of 100 means 0.0000000001 chance of error
 
-The second section contains information about the genotypes of each sample. In the abbreviated .vcf file above,  the 
 
 ---
 
