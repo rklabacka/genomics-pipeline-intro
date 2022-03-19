@@ -115,9 +115,9 @@ You'll see that there are many @SQ header lines (one for each of the reference s
 ### .VCF
 Variant call format (VCF) files are text-based genomic files with information on sequence variation. More specifically, it includes sites where multiple characters are present in the samples examined. A .vcf file contains a <b>[header section](vcf-header-section)</b> and a <b>[variant data section](vcf-data-section)</b>. Basic .vcf files do not contain information on every position from the .fastq or reference file, rather they include information on the genomic positions with sequence variation. As you probably gathered, that makes these files smaller than the .fastq and .sam files (and the less variation, the smaller the file). Here is an abbreviated example of header and alignment lines within a .vcf file:
 
-# <a name="example .vcf"></a>
-| example vcf |
-|:------------|
+# <a name="abbreviated-vcf"></a>
+| abbreviated .vcf |
+|:----------------:|
 
 ```
 ##fileformat=VCFv4.2
@@ -141,7 +141,7 @@ The header section precedes the variant data section, and each heading begins wi
 
 # <a name="vcf-data-section"></a>
 #### 1) .vcf Variant Data Section
-The variant section consists of a row for every variant. The columns provide information about (1) the variant site as a whole and (2) the genotype of each individual in the dataset. The first section of columns correspond to the variant site as a whole, with the first 8 columns being required. These include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. The second section contains information about the genotypes of each sample. In the  
+The variant section consists of a row for every variant. The columns provide information about (1) the variant site as a whole and (2) the genotype of each individual in the dataset. The first section of columns correspond to the variant site as a whole, with the first 8 columns being required. These include information about the location, the reference allele, the alternate allele(s), and the quality of the SNP. The second section contains information about the genotypes of each sample. In the [abbreviated vcf](abbreviated-vcf) above,  
 
 ---
 
