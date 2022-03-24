@@ -101,7 +101,7 @@ Once you exit vim, you can count the number of sequences within this file by cou
 grep '>' covid19-refseq.fasta | wc -l
 ```
 
-The SARS-CoV-2 genome contains a single chromosome, thus the reference genome only as one header.
+The SARS-CoV-2 genome contains a single chromosome, thus the reference genome only has one header.
 
 # <a name="fastq"></a>
 ## .FASTQ 
@@ -340,14 +340,15 @@ Downloading SRA files from the given list of accessions
 
 The script will take a few minutes to run. Once the finished, check that everything ran to completion. Your directory should now contain 8 .fastq.gz files, 8 .bam files, 8 VCF files beginning with ```SRR```, and 1 merged.vcf file. You can verify this information with the following commands:
 ```
-ls *.fastq.gz | wc -l  # Number of .fastq.gz files
-ls -l *.fastq.gz       # Make sure the .fastq.gz files aren't empty
-                       # note: The fifth column of this output is the file size in bytes
-ls *.bam | wc -l       # Number of .bam files
-ls -l *.bam            # Make sure the .bam files aren't empty
-ls SRR*.vcf | wc -l    # Number of SRR*.vcf files
-ls -l SRR*.vcf         # Make sure the *.vcf files aren't empty
-ls -l merged.vcf       # Make sure the merged.vcf file isn't empty
+ls *.fastq.gz | wc -l            # Number of .fastq.gz files
+ls -l *.fastq.gz                 # Make sure the .fastq.gz files aren't empty
+                                 # note: The fifth column of this output is the file size in bytes
+ls *.bam | wc -l                 # Number of .bam files
+ls -l *.bam                      # Make sure the .bam files aren't empty
+ls SRR*.vcf | wc -l              # Number of SRR*.vcf files
+ls -l SRR*.vcf                   # Make sure the *.vcf files aren't empty
+ls -l merged.vcf                 # Make sure the merged.vcf file isn't empty
+grep -v "#" merged.vcf | wc -l   # Count the number of SNPs within merged.vcf
 ```
 
 If the above check worked, congratulations! You successfully ran a published bioinformatics pipeline! Once again, this is not a complete bioinformatics pipeline. The sampling was significantly reduced to allow for shorter computation time, and downstream variant processing is required.  
