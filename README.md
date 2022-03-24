@@ -58,16 +58,50 @@ If you are here as a UTU student taking BIOL 3300, you should do the following:
 
 For this introduction, you will be introduced to three genomic filetypes:
 
+1.  [FASTA](#fasta)
 1.  [FASTQ](#fastq)
-2.  [SAM](#sam)
-3.  [VCF](#vcf)
+1.  [SAM](#sam)
+1.  [VCF](#vcf)
 
 The purpose of a bioinformatics pipeline is to transform biological sequence data to a format that can be interpreted. In many cases, researchers are interested in variable regions within the genomes (variants). To find these regions, raw sequencing reads must be aligned (mapped) to a reference, following which the variants can be determined. An abbreviated and simplified overview of file transformations via bioinformatics pipeline is as follows:
 
 
-![Raw Read FastQC Quality](./images/abbrev-pipeline.jpg)
+![abbrev-pipeline](./images/abbrev-pipeline.jpg)
 
 > The "Reference" in the above diagram is an already-assembled FASTA sequence used to orient the data. The italicized words represent file transformations performed by bioinformatics software)
+
+# <a name="fasta"></a>
+## .FASTA 
+Perhaps the most common filetype to store genetic data, FASTA files simply contain sequence headers and the sequences. A fasta file can have a single header or multiple headers. The header line can contain various items pertaining to the sequence, such as the chromosome, species, and individual ID. A header line is demarcated by the '>' character, and the following line(s) contain the sequence information pertaining to this specific header. The sequence line should only contain information pertaining to the sequence described by the previous header. Some FASTA files have sequences that span multiple lines (these are called 'interleavened' files), and others have the entire sequence contained in a single line. Here is a sample of each:
+
+Interleavened FASTA file:
+```
+>Chromosome_1, SARS-Cov2, Sample_1
+ATTAAAGGTTTATACCTTCCCAGGTAACAAACCAACCAACTTTCGATCTCTTGTAGATCTGTTCTCTAAA
+CGAACTTTAAAATCTGTGTGGCTGTCACTCGGCTGCATGCTTAGTGCACTCACGCAGTATAATTAATAAC
+TAATTACTGTCGTTGACAGGACACGAGTAACTCGTCTATCTTCTGCAGGCTGCTTACGGTTTCGTCCGTG
+TTGCAGCCGATCATCAGCACATCTAGGTTTCGTCCGGGTGTGACCGAAAGGTAAGATGGAGAGCCTTGTC
+```
+
+```
+>Chromosome_1, SARS-Cov2, Sample_1
+ATTAAAGGTTTATACCTTCCCAGGTAACAAACCAACCAACTTTCGATCTCTTGTAGATCTGTTCTCTAAACGAACTTTAAAATCTGTGTGGCTGTCACTCGGCTGCATGCTTAGTGCACTCACGCAGTATAATTAATAACTAATTACTGTCGTTGACAGGACACGAGTAACTCGTCTATCTTCTGCAGGCTGCTTACGGTTTCGTCCGTGTTGCAGCCGATCATCAGCACATCTAGGTTTCGTCCGGGTGTGACCGAAAGGTAAGATGGAGAGCCTTGTC
+```
+
+Both of these examples contain the same information: header line of '>Chromosome_1, SARS-Cov2, Sample_1' and a single nucleotide sequence (280 nucleotides long) starting with 'ATTAAA' and ending with 'CCTTGTC'
+
+#### Looking at a FASTA file
+As stated above, the nucleotide sequences for reference genomes are stored in fasta files. As you can imagine, sometimes these files can be quite large. However, this is dependent on the size of the genome. The human genome contains over three billion base pairs, whereas viral genomes can contain just several thousand. Let's look at an example genome stored in a FASTA file: a SARS-CoV-2 genome. At the command line you can examine this file using ```vim covid19-refseq.fasta```. 
+
+> note: If you are new to using vim, you can exit without saving by typing ':q!' followed by enter. 
+
+Once you exit vim, you can count the number of sequences within this file by counting the number of headers:
+
+```
+grep '>' covid19-refseq.fasta | wc -l
+```
+
+The SARS-CoV-2 genome contains a single chromosome, thus the reference genome only as one header.
 
 # <a name="fastq"></a>
 ## .FASTQ 
@@ -235,6 +269,14 @@ Now check out the example.vcf file. These files can be very large, but example.v
 
 > note: If you are new to using vim, you can remove text wrap by typing ':set nowrap' followed by enter. You can see line numbers by typing ':set number' followed by enter. You can exit vim without saving by typing ':q!' followed by enter. 
 
+Once you have exited the text editor, you can count the number of variants in the VCF from the command line using the following command:
+
+```
+grep -v '#' example.vcf | wc -l
+```
+
+There are 1597 variants contained within this VCF file.
+
 ---
 
 # <a name="exercise"></a>
@@ -271,13 +313,13 @@ For this exercise, you will run a bash script containing an abbreviated version 
 
 You can see the parameters required for the script by looking at the help menu:
 ```
-bash bash_scripts/genomics-pipeline-intro -h
+bash bash_scripts/genomics-pipeline-intro.sh -h
 ```
 
 Now that you have examined the script, run it.
 
 ```
-bash_scripts/genomics-pipeline-intro -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 4
+bash bash_scripts/genomics-pipeline-intro.sh -l July_28_2020_NorAm.txt -g covid19-refseq.fasta -a 0.4999 -t 4
 ``` 
 
 You should see messages printing to stdout as the script runs. The first of these messages will look like this:

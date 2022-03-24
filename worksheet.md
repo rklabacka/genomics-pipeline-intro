@@ -18,7 +18,7 @@ Answer:
 ## Q3: Using information from the genomics-pipeline-intro.sh script and [Farkas et al., 2021](https://doi.org/10.3389/fmicb.2021.665041), draw another schematic specific to their study showing file types, program types (use specific program names in this schematic), and arrows between file types. Add the image file name to the <insert-file-name-here> text below.
 ![Raw Read FastQC Quality](./<insert-file-name-here>)
 
-## Q4: After running the genomics-pipeline-intro.sh script, how many variants are in merged.vcf.gz?
+## Q4: After running the genomics-pipeline-intro.sh script, how many variants are in merged.vcf?
 Answer: 
 
 ## Q5: What is the alternate allele depth of sample SRR11621811|unknown at site 25350 in contig NC_045512.2?
